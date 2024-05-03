@@ -1,3 +1,5 @@
+package Ejercicio_7;
+
 public abstract class Nave {
     protected int vida;
     protected int daño;

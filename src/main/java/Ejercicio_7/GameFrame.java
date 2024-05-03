@@ -1,3 +1,5 @@
+package Ejercicio_7;
+
 import javax.swing.*;
 
 public class GameFrame extends JFrame {
