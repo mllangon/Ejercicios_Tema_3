@@ -31,7 +31,8 @@ public class Fecha {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Manejo de Fechas");
         JButton botonMostrar = new JButton("Mostrar Fecha Actual");
-        JButton botonCambiar = new JButton("Cambiar Año a 2019");
+        JButton botonCambiar2019 = new JButton("Cambiar Año a 2019");
+        JButton botonCambiar2020 = new JButton("Cambiar Año a 2020");
         JTextArea areaTexto = new JTextArea(10, 30);
         areaTexto.setEditable(false);
 
@@ -43,21 +44,30 @@ public class Fecha {
             }
         });
 
-        botonCambiar.addActionListener(new ActionListener() {
+        botonCambiar2019.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 fecha.setAño(2019);
                 areaTexto.setText("Nueva Fecha: " + fecha.toString());
             }
         });
 
+        botonCambiar2020.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fecha.setAño(2020);
+                areaTexto.setText("Nueva Fecha: " + fecha.toString());
+            }
+        });
+
         frame.getContentPane().setBackground(new Color(173, 216, 230)); // RGB para azul claro
         botonMostrar.setBackground(new Color(173, 216, 230));
-        botonCambiar.setBackground(new Color(173, 216, 230));
+        botonCambiar2019.setBackground(new Color(173, 216, 230));
+        botonCambiar2020.setBackground(new Color(173, 216, 230));
         areaTexto.setBackground(new Color(173, 216, 230));
 
         frame.setLayout(new java.awt.FlowLayout());
         frame.add(botonMostrar);
-        frame.add(botonCambiar);
+        frame.add(botonCambiar2019);
+        frame.add(botonCambiar2020);
         frame.add(new JScrollPane(areaTexto));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
