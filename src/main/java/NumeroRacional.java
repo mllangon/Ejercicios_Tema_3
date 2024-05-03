@@ -61,18 +61,19 @@ public class NumeroRacional {
         JFrame frame = new JFrame("Calculadora de Números Racionales");
         frame.setLayout(new FlowLayout());
 
-        NumeroRacional r1 = new NumeroRacional(1, 2);
-        NumeroRacional r2 = new NumeroRacional(2, 3);
-
+        JTextField txtRacional1 = new JTextField(10);
+        JTextField txtRacional2 = new JTextField(10);
         JTextArea textArea = new JTextArea(10, 20);
         textArea.setEditable(false);
-        JButton btnSuma = new JButton("Sumar 1/2 + 2/3");
-        JButton btnResta = new JButton("Restar 1/2 - 2/3");
-        JButton btnMultiplicacion = new JButton("Multiplicar 1/2 * 2/3");
-        JButton btnDivision = new JButton("Dividir 1/2 / 2/3");
+        JButton btnSuma = new JButton("Sumar");
+        JButton btnResta = new JButton("Restar");
+        JButton btnMultiplicacion = new JButton("Multiplicar");
+        JButton btnDivision = new JButton("Dividir");
 
         btnSuma.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                NumeroRacional r1 = parseRacional(txtRacional1.getText());
+                NumeroRacional r2 = parseRacional(txtRacional2.getText());
                 NumeroRacional resultado = r1.sumar(r2);
                 textArea.setText("Suma: " + resultado.toString());
             }
@@ -80,6 +81,8 @@ public class NumeroRacional {
 
         btnResta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                NumeroRacional r1 = parseRacional(txtRacional1.getText());
+                NumeroRacional r2 = parseRacional(txtRacional2.getText());
                 NumeroRacional resultado = r1.restar(r2);
                 textArea.setText("Resta: " + resultado.toString());
             }
@@ -87,6 +90,8 @@ public class NumeroRacional {
 
         btnMultiplicacion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                NumeroRacional r1 = parseRacional(txtRacional1.getText());
+                NumeroRacional r2 = parseRacional(txtRacional2.getText());
                 NumeroRacional resultado = r1.multiplicar(r2);
                 textArea.setText("Multiplicación: " + resultado.toString());
             }
@@ -94,18 +99,26 @@ public class NumeroRacional {
 
         btnDivision.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                NumeroRacional r1 = parseRacional(txtRacional1.getText());
+                NumeroRacional r2 = parseRacional(txtRacional2.getText());
                 NumeroRacional resultado = r1.dividir(r2);
                 textArea.setText("División: " + resultado.toString());
             }
         });
 
         frame.getContentPane().setBackground(new Color(173, 216, 230)); // RGB para azul claro
+        txtRacional1.setBackground(new Color(173, 216, 230));
+        txtRacional2.setBackground(new Color(173, 216, 230));
         btnSuma.setBackground(new Color(173, 216, 230));
         btnResta.setBackground(new Color(173, 216, 230));
         btnMultiplicacion.setBackground(new Color(173, 216, 230));
         btnDivision.setBackground(new Color(173, 216, 230));
         textArea.setBackground(new Color(173, 216, 230));
 
+        frame.add(new JLabel("Racional 1 (x/y):"));
+        frame.add(txtRacional1);
+        frame.add(new JLabel("Racional 2 (x/y):"));
+        frame.add(txtRacional2);
         frame.add(btnSuma);
         frame.add(btnResta);
         frame.add(btnMultiplicacion);
@@ -114,5 +127,12 @@ public class NumeroRacional {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private static NumeroRacional parseRacional(String s) {
+        String[] parts = s.split("/");
+        int numerador = Integer.parseInt(parts[0]);
+        int denominador = Integer.parseInt(parts[1]);
+        return new NumeroRacional(numerador, denominador);
     }
 }
