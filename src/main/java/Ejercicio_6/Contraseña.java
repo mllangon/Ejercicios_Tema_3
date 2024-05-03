@@ -1,3 +1,5 @@
+package Ejercicio_6;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
