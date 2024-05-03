@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Persona {
     enum Sexo {
@@ -67,11 +68,17 @@ public class Persona {
         JTextField txtNombre = new JTextField(10);
         JTextField txtEdad = new JTextField(10);
         JComboBox<Sexo> cbSexo = new JComboBox<>(Sexo.values());
-        JTextField txtPeso = new JTextField(10); // Campo para ingresar el peso
+        JTextField txtPeso = new JTextField(10);
         JTextField txtAltura = new JTextField(10);
         JTextArea textArea = new JTextArea(10, 20);
         textArea.setEditable(false);
         JButton btnCrear = new JButton("Crear Persona");
+        JButton btnMostrar = new JButton("Mostrar Personas");
+
+        ArrayList<Persona> personas = new ArrayList<>();
+        personas.add(new Persona("Mario", 18, Sexo.HOMBRE, 80, 1.83));
+        personas.add(new Persona("Jimena", 16, Sexo.MUJER, 57, 1.65));
+        personas.add(new Persona("Victor", 25, Sexo.HOMBRE, 70, 1.75));
 
         btnCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -81,11 +88,24 @@ public class Persona {
                 double peso = Double.parseDouble(txtPeso.getText());
                 double altura = Double.parseDouble(txtAltura.getText());
 
-                Persona persona = new Persona(nombre, edad, sexo, peso, altura);
-                String info = persona.toString() + "\n";
-                info += "IMC: " + persona.calcularIMC() + ", Valoración: " + persona.valorarPesoCorporal() + "\n";
-                info += "Mayor de edad: " + (persona.esMayorDeEdad() ? "Sí" : "No");
-                textArea.setText(info);
+                Persona nuevaPersona = new Persona(nombre, edad, sexo, peso, altura);
+                personas.add(nuevaPersona);
+
+                textArea.setText("Persona creada:\n" + nuevaPersona.toString());
+            }
+        });
+
+        btnMostrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder info = new StringBuilder();
+                for (int i = 0; i < personas.size(); i++) {
+                    Persona persona = personas.get(i);
+                    info.append("Persona ").append(i + 1).append(":\n");
+                    info.append(persona.toString()).append("\n");
+                    info.append("IMC: ").append(persona.calcularIMC()).append(", Valoración: ").append(persona.valorarPesoCorporal()).append("\n");
+                    info.append("Mayor de edad: ").append(persona.esMayorDeEdad() ? "Sí" : "No").append("\n\n");
+                }
+                textArea.setText(info.toString());
             }
         });
 
@@ -93,7 +113,7 @@ public class Persona {
         txtNombre.setBackground(new Color(173, 216, 230));
         txtEdad.setBackground(new Color(173, 216, 230));
         cbSexo.setBackground(new Color(173, 216, 230));
-        txtPeso.setBackground(new Color(173, 216, 230)); // Establecer el color de fondo del campo de peso
+        txtPeso.setBackground(new Color(173, 216, 230));
         txtAltura.setBackground(new Color(173, 216, 230));
         btnCrear.setBackground(new Color(173, 216, 230));
         textArea.setBackground(new Color(173, 216, 230));
@@ -104,11 +124,17 @@ public class Persona {
         frame.add(txtEdad);
         frame.add(new JLabel("Sexo:"));
         frame.add(cbSexo);
-        frame.add(new JLabel("Peso:")); // Etiqueta para el campo de peso
-        frame.add(txtPeso); // Agregar el campo de peso a la interfaz
+        frame.add(new JLabel("Peso:"));
+        frame.add(txtPeso);
         frame.add(new JLabel("Altura:"));
         frame.add(txtAltura);
         frame.add(btnCrear);
+        frame.add(btnMostrar);
+        frame.add(new JScrollPane(textArea)); // Agregar el cuadro de texto al final
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.add(btnMostrar);
         frame.add(new JScrollPane(textArea));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
