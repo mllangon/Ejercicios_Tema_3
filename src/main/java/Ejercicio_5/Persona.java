@@ -1,3 +1,5 @@
+package Ejercicio_5;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -130,7 +132,7 @@ public class Persona {
         frame.add(txtAltura);
         frame.add(btnCrear);
         frame.add(btnMostrar);
-        frame.add(new JScrollPane(textArea)); // Agregar el cuadro de texto al final
+        frame.add(new JScrollPane(textArea));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
