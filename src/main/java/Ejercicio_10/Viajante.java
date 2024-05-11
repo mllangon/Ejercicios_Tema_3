@@ -1,3 +1,5 @@
+package Ejercicio_10;
+
 public class Viajante extends Empleado {
     private int viajesRealizados;
 

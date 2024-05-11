@@ -1,3 +1,5 @@
+package Ejercicio_10;
+
 public class Jefe extends Empleado {
     private int anosJefe;
 
