@@ -1,3 +1,5 @@
+package  Ejercicio_12;
+
 public class Fecha {
     private int dia;
     private int mes;
